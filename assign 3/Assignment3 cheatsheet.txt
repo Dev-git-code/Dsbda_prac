@@ -2,7 +2,6 @@
 $hbase shell
 create 'hbase_flight', 'cf'  #In HBASE SHELL
 
-//Randap----
 #
 
 create database db;
