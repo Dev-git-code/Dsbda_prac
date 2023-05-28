@@ -1,0 +1,25 @@
+#read csv
+import pandas as pd
+df = pd.read_csv('fb.csv')
+df.columns.to_list()
+
+#1. Using MatPlotLib
+import matplotlib.pyplot as plt
+plt.bar('Type','like',data = df)
+plt.scatter('Post Hour','like',data=df)
+plt.plot('Post Month','Page total likes',data = df)
+df.plot.area(x= 'Post Month', y=['share','like','comment])
+
+#2. Using Seaborn
+import seaborn as sns
+sns.boxplot(x='Post Hour',data = df)
+sns.scatterplot(x='Post Month',y='like',hue='Type',data=df)
+sns.lineplot(x='comment',y='like',data=df)
+sns.hisplot(x = 'Page total likes' , data = df)
+correlation_matrix = df[['Lifetime Engaged Users',
+			 'comment',
+		         'like',
+			 'share']].corr()
+sns.heatmap(correlation_matrix,annot=True,cmap='coolwarm')
+			
+				 

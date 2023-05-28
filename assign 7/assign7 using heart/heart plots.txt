@@ -1,0 +1,43 @@
+#Read csv 
+import pandas as pd
+df = pd.read_csv('heart.csv')
+df.colums.to_list()
+
+** use fig = plt.subplots(figsize = (12,8)) for changing plot size
+
+#using matplotlib
+import matplotlib.pyplot as plt
+
+1. gender bar plot
+gender_counts = df['sex'].value_counts()
+plt.bar(['Female','Male'], gender_counts)
+
+2. pie chart 
+age = df['age']
+young = df[age<40]
+middle = df[(age>=40)&(age<55)]
+old = df[age>=55]
+colors = ['blue','green','yellow']
+labels = ['young','middle','old']
+plt.pie(len(young),len(middle),len(old),colors = colors, labels = labels)
+
+3. plot histogram
+plt.hist(df['tresbps'],edgecolor = 'black')
+
+#using seaborn
+import seaborn as sns
+
+1. box plot
+sns.boxplot(x='target',y='oldpeak',data = df)
+
+2. count plot
+sns.countplot(x='cp',hue='target',data=df)
+
+3.scatter plot
+sns.scatterplot(x='oldpeak',y='chol',hue='target',size='age',data=df)
+**resize if small
+
+4.heatmap
+correlation_matrix = df.corr()
+sns.heatmap(correlation_matrix,annot=True,cmap='coolwarm',fmt='.2f')
+**resize if small

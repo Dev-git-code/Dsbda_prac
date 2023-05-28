@@ -1,0 +1,37 @@
+#Read csv
+import pandas as pd
+df = pd.read_csv('fb.csv')
+df.head()
+df.shape
+df.info()
+df.columns.to_list()
+
+#1. Creating subsets
+df.iloc[[2,4,6],[2,3]]
+sub = df[['Type','Category','comment','like','share']]
+like_filter = sub.loc[sub['like']>100]
+fil= sub.loc[(sub['like']>200) & (sub['share']>40)]
+
+#2. Merge Datasets
+df2 = df[['Total Interactions','Paid']]
+merged_df = pd.merge(fil,df2,left_index = True, right_index = True)
+
+#3. Sort Data
+sorted_df = fil.sort_values(by = 'comment' ,ascending = False)
+
+#4. Transpose
+fil.head()
+fil_t = fil.T
+fil_t.head()
+
+#5. Shape and Reshape data
+
+##1. Melting
+fil.melt()
+fil.melt(id_vars = 'Category')
+
+##2.Casting
+dummy = pd.get_dummies(fil)
+fil.dtypes
+fil['like'].astype(int)
+fil['Type'].astype('string')
